@@ -6,4 +6,26 @@
     <h1>{{post.title}}</h1>
         Published {{ post.publish }} by {{ post.author }}
     {{ post.body|truncatewords:30|linebreaks }}
+
+    {% with total_comments=comments.count %}
+    <h2>
+        {{total_comments}} comment{{ total_comments|pluralize}}
+    </h2>
+    {% endwith %}
+    {% for comment in comments %}
+    <div >
+        <p >
+            Comment #{{ forloop.counter }} by {{ comment.name }}:
+        </p>
+        <div>
+            {{ comment.body|linebreaks }}
+        </div>
+        <p>
+            {{ comment.created }}
+        </p>
+    </div>
+    {% empty %}
+    <p>No comments yet.</p>
+    {% endfor %}
+    {% include "blog_my/post/includes/comment_form.html" %}
 {% endblock content %}

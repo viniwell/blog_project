@@ -3,10 +3,10 @@
 {% block title %}My blog{% endblock %}
 
 {% block content %}
-    <h1>My Blog</h1>
+    <h1>My Blog</h1>    <a href="{% url "blog_my:add_advertisement" %}">Add a new advertisement</a>
     {% for post in posts %}
     <h2>
-        <a href="{% url 'blog_my:post_detail' post.id %}">
+        <a href="{{post.get_absolute_url}}">
             {{ post.title}} with size of {{post.size}}
         </a>
     </h2>
@@ -15,4 +15,6 @@
     </p>
     {{ post.body|truncatewords:30|linebreaks }}
     {% endfor %}
+
+    {% include "pagination.html" with page=posts%}
 {% endblock content %}

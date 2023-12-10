@@ -1,0 +1,7 @@
+{% load crispy_forms_tags %}
+<h2>Create your comment here</h2>
+<form method="post" action="{% url 'blog:post_comment' post.id %}">
+    {{ form|crispy }}
+    {% csrf_token %}
+    <p><input type="submit" value="Add comment"></p>
+</form>

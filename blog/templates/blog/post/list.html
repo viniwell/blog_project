@@ -3,16 +3,20 @@
 {% block title %}My blog{% endblock title %}
 
 {% block content %}
-    <h1>My blog</h1>
+    <h1 class="border-bottom border-3 pb-2">My blog</h1>
     {% for post in posts %}
     <h2>
-        <a href="{% url 'blog:post_detail' post.id %}">
+        <a class="text-decoration-none"href="{{post.get_absolute_url}}">
             {{post.title}}
         </a>
     </h2>
-<p class=date>
+<p class="date fst-italic text-secondary">
     Published {{post.publish}} by {{post.author}}
 </p>
-    {{post.body|truncatewords:30|linebreaks}}
+    <div class="border-bottom border-2">
+        {{post.body|truncatewords:30|linebreaks}}
+
+    </div>
     {% endfor %}
+    {% include "pagination.html" with page=page_obj %}
 {% endblock content %}

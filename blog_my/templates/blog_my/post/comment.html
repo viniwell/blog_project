@@ -1,0 +1,10 @@
+{% extends "blog_my/base.html" %}
+
+{% block title %}Successful!{% endblock title %}
+
+{% block content %}
+<h2>Comment was successfully added!</h2>
+<a href="{{post.get_absolute_url}}">Get back to post</a>
+<a href="{% url "blog_my:post_list" %}">Get back to main page</a>
+
+{% endblock content %}
