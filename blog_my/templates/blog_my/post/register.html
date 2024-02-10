@@ -1,0 +1,13 @@
+{% extends "blog_my/base.html" %}
+
+{% block title %}Sign up{% endblock title %}
+
+{% block content %}
+<h2>Hi! You can sign up using the following form</h2>
+<form method="post" enctype=multipart/form-data>
+    {{form.as_p}}
+    {% csrf_token %}
+    <input type="submit" value="Create account">
+</form>
+<p>Already have an account? <a href="#">Log in here</a></p>
+{% endblock content %}

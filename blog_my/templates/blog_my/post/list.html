@@ -1,9 +1,12 @@
 {% extends "blog_my/base.html" %}
 
-{% block title %}My blog{% endblock %}
+{% block title %}My Products{% endblock %}
 
 {% block content %}
-    <h1>My Blog</h1>    <a href="{% url "blog_my:add_advertisement" %}">Add a new advertisement</a>
+    <h1>My Products</h1>
+    <div>Hello, {{request.user.username}}</div>  
+    <a href="{% url "blog_my:add_advertisement" %}">Add a new advertisement</a>
+    <a href="{% url "blog_my:mainpage" %}">Back to main page</a>
     {% for post in posts %}
     <h2>
         <a href="{{post.get_absolute_url}}">

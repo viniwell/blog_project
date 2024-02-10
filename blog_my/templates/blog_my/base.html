@@ -8,12 +8,13 @@
     <title>{% block title %}{% endblock  %}</title>
 </head>
 <body>
+    <div class="sidebar">
+        <a href="{% url "blog_my:post_list" %}">My products</a>
+    </div>
     <div class="content">
         {% block content %}
         {% endblock content %}
     </div>
-    <div class="sidebar">
-        <a href="{% url "blog_my:post_list" %}">My products</a>
-    </div>
+    
 </body>
 </html>

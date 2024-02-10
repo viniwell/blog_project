@@ -1,6 +1,8 @@
 from django.contrib import admin
 
-from .models import Shop_Post, Size, Comment
+from .models import Shop_Post, Size, Comment, Profile
+
+from django.contrib.auth.models import User
 
 
 
@@ -29,3 +31,11 @@ class CommentAdmin(admin.ModelAdmin):
     search_fields = ['name', 'email', 'post', 'created', 'active']
     date_hierarchy = 'created'
     ordering = ['created']
+
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display=['user', 'birthday', 'photo']
+    list_filter=['user', 'birthday', 'photo']
+    search_field=['user', 'birthday']
+    ordering=['user']

@@ -1,7 +1,10 @@
-from django.contrib.auth.models import User
+from typing import Any
+from django.contrib.auth.models import AbstractUser, User
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
+from django.core.files.images import ImageFile
+import datetime
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -66,3 +69,24 @@ class Comment(models.Model):
         ]
     def __str__(self):
         return f'Comment by {self.name} on {self.post}'
+
+
+class Profile(models.Model):
+    user=models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile')
+    birthday=models.DateField(blank=True, null=True)
+    bio=models.CharField(max_length=150, blank=True)
+    photo=models.ImageField(upload_to='users/%Y%m%d', blank=True)
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        date=datetime.datetime.now()
+        self.setup(bio='No bio yet.', photo='media/anonymous/anonymoususer.png', birthday={'year':date.year, 'month':date.month, 'day':date.day})
+
+    def setup(self, bio=None, photo=None, birthday=None):
+        if bio:
+            self.__setattr__('bio', bio)
+        if photo:
+            image=ImageFile(open(photo, 'rb'))
+            self.__setattr__('photo', image)
+        if birthday:
+            self.__setattr__('birthday', datetime.date(year=birthday['year'], month=birthday['month'], day=birthday['day']))

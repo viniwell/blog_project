@@ -1,0 +1,19 @@
+{% extends "blog_my/base.html" %}
+
+{% block title %}Main Page{% endblock title %}
+
+
+{% block content %}
+<h2>Main Page</h2>
+<p>Here you look for different advertisements</p>
+<div>Hello, {{request.user}}</div>
+<h3>Newest posts are:</h3>
+{% for post in posts %}
+<div>
+    <a href="{{post.get_absolute_url}}"><h4>{{post.title}}</h4></a> by <a href="#">{{post.author}}</a>
+    <p>{{post.body|truncatewords:30|linebreaks}}</p>
+    <i>{{post.publish}}</i>
+
+</div>
+{% endfor %}
+{% endblock content %}

@@ -4,6 +4,7 @@
 {% block content %}
 {% if sent %}
 <h1>Advertisement was successfully added!</h1>
+<div>Hello, {{request.user.username}}</div>
 <a href="{% url "blog_my:post_list" %}">Get back</a>
 {% else %}
 Adding a new addvertisement
